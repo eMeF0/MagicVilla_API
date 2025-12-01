@@ -1,5 +1,3 @@
-using MagicVilla_VillaAPI.Models.Logging;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,7 +9,6 @@ builder.Services.AddControllers(options =>
     //options.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<ILogging, LoggingV2>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

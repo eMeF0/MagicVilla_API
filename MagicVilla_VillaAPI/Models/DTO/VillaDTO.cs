@@ -6,11 +6,14 @@ namespace MagicVilla_VillaAPI.Models.DTO
     {
         public int Id { get; set; }
         [Required]
-        [MaxLength(40, ErrorMessage = "The name has a maximum length of 40 characters.")]
-        [MinLength(3, ErrorMessage = "The name has a minimum length of 3 characters.")]
+        [MaxLength(30)]
         public string Name { get; set; }
-        public int Occupancy { get; set; }
-
+        public string Details { get; set; }
+        [Required]
+        public double Rate { get; set; }
         public int Sqft { get; set; }
+        public int Occupancy { get; set; }
+        public string ImageUrl { get; set; }
+        public string Amenity { get; set; }
     }
 }
