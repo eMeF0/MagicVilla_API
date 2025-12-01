@@ -1,13 +1,17 @@
+using MagicVilla_VillaAPI.Models.Logging;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// Incjet logger serilog
+//Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.File("log/villaLogs.txt", rollingInterval:RollingInterval.Day).CreateLogger();
+//builder.Host.UseSerilog();
 builder.Services.AddControllers(options =>
 {
-    options.ReturnHttpNotAcceptable = true;
+    //options.ReturnHttpNotAcceptable = true;
 }).AddNewtonsoftJson().AddXmlDataContractSerializerFormatters();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddSingleton<ILogging, LoggingV2>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
