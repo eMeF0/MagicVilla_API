@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="MagicVilla_Utility/MagicVilla_Utility.csproj" Id="c639e95e-4a65-40e8-9658-beb28d807578" />
   <Project Path="MagicVilla_VillaAPI/MagicVilla_VillaAPI.csproj" />
   <Project Path="MagicVilla_Web/MagicVilla_Web.csproj" Id="af936702-defe-45a0-a77c-27740e5e73b8" />
 </Solution>
