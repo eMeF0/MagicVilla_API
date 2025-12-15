@@ -1,4 +1,6 @@
 using MagicVilla_Web.Mapping;
+using MagicVilla_Web.Services;
+using MagicVilla_Web.Services.IServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,13 @@ builder.Services.AddAutoMapper(cfg =>
 {
     cfg.AddProfile(new MappingConfigure());
 });
+
+builder.Services.AddHttpClient<IVillaService, VillaService> ();
+builder.Services.AddScoped<IVillaService, VillaService>();
+
+builder.Services.AddHttpClient<IVillaNumberService, VillaNumberService>();
+builder.Services.AddScoped<IVillaNumberService, VillaNumberService>();
+
 
 var app = builder.Build();
 

@@ -14,6 +14,7 @@ namespace MagicVilla_VillaAPI.Repository
         public Repository(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
+            //_dbContext.VillaNumbers.Include(x => x.Villa).ToList();
             this.dbSet = _dbContext.Set<T>();
         }
         public async Task CreateAsync(T entity)
@@ -22,7 +23,7 @@ namespace MagicVilla_VillaAPI.Repository
             await SaveAsync();
         }
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true)
+        public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, bool tracked = true, string? includeProperites = null)
         {
             IQueryable<T> query = dbSet;
             if (!tracked)
@@ -33,16 +34,31 @@ namespace MagicVilla_VillaAPI.Repository
             {
                 query = query.Where(filter);
             }
+
+            if (includeProperites != null)
+            {
+                foreach (var includeProp in includeProperites.Split(new char[]{','}, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return await query.FirstOrDefaultAsync();
         }
 
-        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null)
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperites = null)
         {
             IQueryable<T> query = dbSet;
 
             if (filter != null)
             {
                 query = query.Where(filter);
+            }
+            if (includeProperites != null)
+            {
+                foreach (var includeProp in includeProperites.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
             }
             return await query.ToListAsync();
         }
